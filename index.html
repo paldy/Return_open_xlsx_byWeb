@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XLSX password</title>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
+<style>
+
+body,
+.gbuttn {
+  background-color: #d3d3d3;
+  font-family: 'Montserrat', sans-serif;
+  color: #FFF;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.gbuttn {
+  background-color: #1161ed;
+  color: #FFF;
+  width: 100%;
+  padding: 10px 20px;
+  display: block;
+  height: 39px;
+  border-radius: 20px;
+  margin-top: 30px;
+  transition: all 0.5s ease-in-out;
+  border: none;
+  text-transform: uppercase;
+}
+
+.gbuttn:hover {
+  background: #4082f5;
+  box-shadow: 0px 4px 35px -5px #4082f5;
+  cursor: pointer;
+}
+
+.gbuttn:focus {
+  outline: none;
+}
+
+.main_container {
+  position: relative;
+  height: 80%;
+  max-width: 405px;
+  margin: auto;
+  padding: 60px 60px;
+  background: #505050;   
+  box-shadow: 0px 30px 60px -5px #000;
+}
+
+form {
+  padding-top: 60px;
+}
+
+h2 {
+  padding-left: 12px;
+  font-size: 22px;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+  letter-spacing: 2px;
+  display: inline-block;
+  font-weight: 100;
+}
+
+h2:first-child {
+  padding-left: 0px;
+}
+
+span {
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0.4; 
+  display: inline-block;
+  position: relative;
+  top: -65px;
+  transition: all 0.5s ease-in-out;
+}
+
+.inpt {
+  border: none;
+  width: 89%;
+  padding: 10px 20px;
+  display: block;
+  height: 15px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0);
+  overflow: hidden;
+  margin-top: 15px;
+  transition: all 0.5s ease-in-out;
+}
+
+.inpt:focus {
+  outline: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.inpt:focus + span {
+  opacity: 0.6;
+}
+
+input[type="email"],
+input[type="file"] {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+}
+
+input {
+  display: inline-block;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+hr {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  top: 85px;
+  position: relative;
+}
+
+a {
+  text-align: center;
+  display: block;
+  top: 120px;
+  position: relative;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+</style>
+
+</head>
+<body>
+
+<main class="main_container">
+    <h1>PASSWORD TO YOUR XLSX FILE</h1>
+        <p>This service allows you to recover passwords to your xlsx documents.</p>
+        <p>Uses brute-force search of passwords, without specifying the length.</p>
+        <p>When the password is found, you get a new non-protected file at your email.</p>
+
+    <form id="frm" action="/uploadfiles" enctype="multipart/form-data" method="POST">
+        <input type="email" class="inpt" name="email" required />
+        <span>your email*</span>
+        <br>
+        <br>
+        <input class="inpt" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="files" multiple required /> 
+        <span>file(s)  .xlsx</span>
+        <br>
+        <button class="gbuttn">
+        Upload
+        </button>
+    </form>
+</main>
+
+<script>
+    async function Upload(event) {
+        event.preventDefault();
+        const formNode = document.getElementById('frm')
+        const fd = new FormData(formNode);
+        console.log(fd)
+        try {
+            const response = await fetch("/uploadfiles/", {
+                method: "POST",
+                body: fd,
+            });
+            const result = await response.text();
+            console.log("Result:", result);
+            alert(result);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+    frm.addEventListener("submit", Upload);
+</script>
+</body>
+</html>
+
+
+
+
