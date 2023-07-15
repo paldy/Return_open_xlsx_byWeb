@@ -13,19 +13,12 @@ app = FastAPI(title="password of xlsx file")
 HOW_FAT_THE_FILE_IS = 1000000  # max_size of the file
 FILES_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
-# For Twilio sender:
-# for sandbox:
-# ACCOUNT_SID = 'AC7b147cb3734953989ff0d92fe024145d'
-# AUTH_TOKEN = '82497158aed4e611b44c97468c38d0c3'
-# for real account:
-ACCOUNT_SID = 'AC1ac06b2f2a19e4e0ebaf39019a19a349'
-AUTH_TOKEN = '59f74f704d2a19327ff1224a629ffb06'
+ACCOUNT_SID = 'AC1ac06bxxxxxxxxe0ebaf39019a19a349'
+AUTH_TOKEN = '59f74f70xxxxxxxxxxxxxxx9ffb06'
 
 # from and to - phone numbers:
-FROM = '+14155238886'
-# FROM = '+48664771449'
-TO = '+48664771449'
-# TO = '+37064808622'
+FROM = '+1415xxxxx86'
+TO = '+37xxxxxxxxx'
 
 
 
@@ -37,7 +30,6 @@ def safe_file(files: list, email: str):
     for f in files:
         with open(f"{email}/{f.filename}", "wb") as fb:
             fb.write(f.file.read())
-            # fb.write(await f.read())
 
 
 def send_wamessage(email: str):
@@ -54,7 +46,6 @@ def send_wamessage(email: str):
         print()
     except TwilioRestException as e:
         print('Catch error here', e)  
-# e.msg - Unable to create record: Twilio could not find a Channel with the specified From address
 
 
 @app.post("/uploadfiles/")
