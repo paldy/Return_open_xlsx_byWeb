@@ -13,10 +13,9 @@ app = FastAPI(title="password of xlsx file")
 HOW_FAT_THE_FILE_IS = 1000000  # max_size of the file
 FILES_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
+# For Twilio:
 ACCOUNT_SID = 'AC1ac06bxxxxxxxxe0ebaf39019a19a349'
 AUTH_TOKEN = '59f74f70xxxxxxxxxxxxxxx9ffb06'
-
-# from and to - phone numbers:
 FROM = '+1415xxxxx86'
 TO = '+37xxxxxxxxx'
 
